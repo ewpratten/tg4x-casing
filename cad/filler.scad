@@ -4,11 +4,14 @@
 KBD_WIDTH = 255;
 KBD_HEIGHT = 84;
 
+// Global cutout sizing
+CUTOUT_DEPTH = 20;
+
 // Used to automatically render each half to a different STL file
 ENABLE_HALVES = [ true, true ];
 
 module place_standoff_holes(x = 5, y = 4) {
-  linear_extrude(height = 10) {
+  linear_extrude(height = CUTOUT_DEPTH) {
     // Left
     translate([ 62, 0, 0 ]) square([ x, y ]);
     // Middle
@@ -22,13 +25,24 @@ module place_standoff_holes(x = 5, y = 4) {
 difference() {
   // Model
   difference() {
-    // Keyboard bounds
-    cube([ KBD_WIDTH, KBD_HEIGHT, 3 ]);
+    // The fill shape
+    union() {
+      // Keyboard bounds
+      cube([ KBD_WIDTH, KBD_HEIGHT, 3 ]);
+
+      // Walls
+      union() {
+        // Right wall
+        translate([ KBD_WIDTH - 3, 0, 0 ]) cube([ 3, KBD_HEIGHT, 11 ]);
+        // Top wall
+        translate([ 0, KBD_HEIGHT - 4, 0 ]) cube([ KBD_WIDTH, 4, 11 ]);
+      }
+    }
 
     // Cut out the standoff holes
     union() {
       // Corner cuts
-      linear_extrude(height = 10) {
+      linear_extrude(height = CUTOUT_DEPTH) {
         // Top left
         translate([ 0, 80, 0 ]) square([ 4, 4 ]);
         // Bottom left
@@ -57,7 +71,7 @@ difference() {
       }
       // Section 2
       union() {
-        translate([ 72, 10, 0]) cube([ 48, 25, 10 ]);
+        translate([ 72, 10, 0 ]) cube([ 48, 25, 10 ]);
         translate([ 72, KBD_HEIGHT - 10 - 25, 0 ]) cube([ 48, 25, 10 ]);
       }
       // Section 3
