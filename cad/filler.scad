@@ -47,13 +47,37 @@ difference() {
 
     // Cut out a space for the controller
     translate([ 0, 22, 0 ]) cube([ 45, 21, 10 ]);
+
+    // Removal of unnecessary material
+    union() {
+      // Section 1
+      union() {
+        translate([ 10, 10, 0 ]) cube([ 45, 25, 10 ]);
+        translate([ 10, KBD_HEIGHT - 10 - 25, 0 ]) cube([ 45, 25, 10 ]);
+      }
+      // Section 2
+      union() {
+        translate([ 72, 10, 0]) cube([ 48, 25, 10 ]);
+        translate([ 72, KBD_HEIGHT - 10 - 25, 0 ]) cube([ 48, 25, 10 ]);
+      }
+      // Section 3
+      union() {
+        translate([ 135, 10, 0 ]) cube([ 45, 25, 10 ]);
+        translate([ 135, KBD_HEIGHT - 10 - 25, 0 ]) cube([ 45, 25, 10 ]);
+      }
+      // Section 4
+      union() {
+        translate([ 197, 10, 0 ]) cube([ 48, 25, 10 ]);
+        translate([ 197, KBD_HEIGHT - 10 - 25, 0 ]) cube([ 48, 25, 10 ]);
+      }
+    }
   }
 
   // Slicing functionality
   if (!ENABLE_HALVES[0]) {
-    translate([ 0, 0, 0 ]) cube([ KBD_WIDTH/2, KBD_HEIGHT, 10 ]);
-  } 
+    translate([ 0, 0, 0 ]) cube([ KBD_WIDTH / 2, KBD_HEIGHT, 10 ]);
+  }
   if (!ENABLE_HALVES[1]) {
-    translate([ KBD_WIDTH/2, 0, 0 ]) cube([ KBD_WIDTH/2, KBD_HEIGHT, 10 ]);
+    translate([ KBD_WIDTH / 2, 0, 0 ]) cube([ KBD_WIDTH / 2, KBD_HEIGHT, 10 ]);
   }
 }
