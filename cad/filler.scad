@@ -10,7 +10,7 @@ CUTOUT_DEPTH = 20;
 // Used to automatically render each half to a different STL file
 ENABLE_HALVES = [ true, true ];
 
-module place_standoff_holes(x = 5, y = 4) {
+module place_standoff_holes(x = 5, y = 5) {
   linear_extrude(height = CUTOUT_DEPTH) {
     // Left
     translate([ 62, 0, 0 ]) square([ x, y ]);
@@ -36,6 +36,13 @@ difference() {
         translate([ KBD_WIDTH - 3, 0, 0 ]) cube([ 3, KBD_HEIGHT, 11 ]);
         // Top wall
         translate([ 0, KBD_HEIGHT - 4, 0 ]) cube([ KBD_WIDTH, 4, 11 ]);
+        // Left wall
+        translate([ 0, 0, 0 ]) cube([ 4, KBD_HEIGHT, 11 ]);
+        // Front wall
+        difference() {
+          translate([ 0, 0, 0 ]) cube([ KBD_WIDTH, 3, 11 ]);
+          translate([ KBD_WIDTH / 2, 0, 0 ]) cube([ 35, 10, 20 ]);
+        }
       }
     }
 
@@ -44,13 +51,13 @@ difference() {
       // Corner cuts
       linear_extrude(height = CUTOUT_DEPTH) {
         // Top left
-        translate([ 0, 80, 0 ]) square([ 4, 4 ]);
+        translate([ 0, 79, 0 ]) square([ 5, 5 ]);
         // Bottom left
-        translate([ 0, 0, 0 ]) square([ 4, 4 ]);
+        translate([ 0, 0, 0 ]) square([ 5, 5 ]);
         // Top right
-        translate([ 251, 80, 0 ]) square([ 4, 4 ]);
+        translate([ 250, 79, 0 ]) square([  5, 5 ]);
         // Bottom right
-        translate([ 251, 0, 0 ]) square([ 4, 4 ]);
+        translate([ 250, 0, 0 ]) square([  5, 5]);
       }
 
       // Centeral standoff holes
@@ -60,7 +67,7 @@ difference() {
     }
 
     // Cut out a space for the controller
-    translate([ 0, 22, 0 ]) cube([ 45, 21, 10 ]);
+    translate([ 0, 22, 0 ]) cube([ 45, 21, CUTOUT_DEPTH ]);
 
     // Removal of unnecessary material
     union() {
@@ -89,9 +96,9 @@ difference() {
 
   // Slicing functionality
   if (!ENABLE_HALVES[0]) {
-    translate([ 0, 0, 0 ]) cube([ KBD_WIDTH / 2, KBD_HEIGHT, 10 ]);
+    translate([ 0, 0, 0 ]) cube([ KBD_WIDTH / 2, KBD_HEIGHT, 30 ]);
   }
   if (!ENABLE_HALVES[1]) {
-    translate([ KBD_WIDTH / 2, 0, 0 ]) cube([ KBD_WIDTH / 2, KBD_HEIGHT, 10 ]);
+    translate([ KBD_WIDTH / 2, 0, 0 ]) cube([ KBD_WIDTH / 2, KBD_HEIGHT, 30 ]);
   }
 }
