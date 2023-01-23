@@ -1,9 +1,9 @@
 
 ![](./assets/render.png)
 
-# TG4X case
+# TG4x case
 
-This repository contains the OpenSCAD source code for a custom [TG4X](https://github.com/MythosMann/tg4x) case.
+This repository contains the OpenSCAD source code for a custom [TG4x](https://github.com/MythosMann/tg4x) case.
 
 The goal of this project was to build an insert to protect the middle PCB from accidental damage while in my backpack.
 
