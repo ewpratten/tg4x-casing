@@ -16,3 +16,10 @@ make
 ```
 
 The resulting STLs will be written to `./build`
+
+## Recommended print settings
+
+| Parameter    | Value |
+|--------------|-------|
+| Layer height | 0.2mm |
+| Infill       | 40%   |
